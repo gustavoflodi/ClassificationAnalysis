@@ -38,7 +38,7 @@ Let's get to know now, the (possibly) easiest method to predict classes.
     2. There! You have your rule, now count the errors made from this rule and sum it to the other specific values from this attribute. 
     3. Finally, compare it to the other attributes to define the one with the smallest number of errors.
     
-## Model evalutation: how good is our first model?
+## Model evaluation: how good is our first model?
 
 We have the single rule, but how good is its prediction?
 
