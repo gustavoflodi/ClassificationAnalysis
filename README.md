@@ -77,4 +77,57 @@ Matrix used to calculate important parameters and its values for model evaluatio
     
 ## Naive Bayes Classification
 
+A method for classification and **predictor selection**.
+
+- The principle here is to assign a posterior probability to each predictor given the target class.
+
+### Important terms
+
+- A-priori probability: probability that event A happens.
+- A-posteriori probability: probability that event A happens, given that B already occured.
+
+### Bayes' Theorem
+
+$$ P(A|B) = (P(B|A) * P(A)) / P(B) $$
+
+*Probability that A occurs, given that B already occured, is equal to the probability of B given A, times probability of A, divided by probability of B.*
+
+### Back to the classification: Steps
+
+1. We have to classify an unknown test instance T.
+2. We calculate the probability of observing T, given the hypothesis h that T belongs to the class ci.
+3. h would be that the class is, for example, "TRUE" for wheter today will rain or not. And T is the instance with all its known attributes.
+4. We get then that:
+        $$ P(h|T) = (P(T|h) * P(h)) / P(T) $$
+5. T being the vector of attributes known, we have to determine the probability for each of the attributes ak: P(ak|ci).
+6. We we consider that each and all attributes are independent from all another, we cam multiply them for P(T|h).
+7. In the end, all we have is to find the hypothesis h that maximizes the likelihood of observing P(h|T) -> P(T|ci) * P(ci)
+        
+- **Problem**: it does not allow for probability equal to 0.
+        - Just because there is no data, does not mean it coulnd't happen in reality.
+        - Solution: **Laplace Smoothing** considers k=1 for minimal time that one has seen an attribute.
+
+## Reality of Datasets
+
+### Potential Problems
+
+1. One single value observed
+2. Some values are missing
+3. Class attributes were not observed
+
+### Potential Solutions
+
+1. Ignore the instances with missing values for big datasets. Law of the big numbers.
+2. A **predictor is ignored** if all or most of the values are missing.
+3. An **instance is ignored** if the value of the target class is missing from the training data or the value of all the predictors are missing.
+4. If a case with missing some predictors' values is considered, then use the predictor(s) with non-missing values.
+5. Use these non-missing values predictors to train and test the model.
+
+### Numerical Values for Attribute Values
+
+Two solutions:
+
+- **Binning**: original continuous values become interval or ordinal labels.
+- **Probabilistic distribution**: one density or probabilitic distribution of the attribute value (a.k.a. histogram of continuous values) to each class. Described by mean and standard deviation.
+
 
