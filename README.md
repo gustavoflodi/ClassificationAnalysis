@@ -242,6 +242,116 @@ Sometimes the attributes' values are not known for some instances due to time co
 
 - **C4.5**: discrete and continuous values as attributes, pruning and missing values from attributes also possible.
 
+## K-Nearest Neighbors Algorithm
+
+Moving on from 1R Algorithm and the Decision Trees one, we still have to learn this very important algorithm built on the idea that:
+
+> For every unknown instance that is an identifical or very similar instance already classified. You group these instances based on the closest neighbors classes.
+- It's a **Learn and Predict Algorithm**, with no model being generated, the calculations are done initially and the instances that are classified join the training data.
+- K is the number of neighbors to classify unknown instances. If k is small, then the algorithm will be more robust, perceving more detail.
+- When k is big, a bias will be introduced and the instances will be added to a uniformity that doesn't reflect reality.
+
+### Measuring Similarity
+
+Similarity is measured with the distance between attributes' values from different instances.
+
+There are different ways to calculate distance between values in a 2D-representation cartesian representation of 2 attributes. For example:
+- Euclidian-distance.
+- Manhattan-distance.
+
+### k-NNs Requirements, Advantages and Disadvantages
+
+#### Requirements
+
+1. The dataset has to have enough examples.
+2. Instances should not have a lot of attributes (>20).
+3. Attributes have to be cardinal or at least ordinal (not nominal).
+4. If the attribute is ordinal, it needs to be converted into a numerical type.
+
+#### Advantages
+
+1. Training of data is quick as no model is built.
+2. The information gathered from training is not lost since all instances are saved.
+3. It allows later Regression or other more advanced Classification tasks.
+
+#### Disadvantages
+
+1. Could be slow depending on the amount of calculation needed.
+2. Memory based, i.e., the more samples, the more storage to save the samples.
+3. Could be misleading with irrelevant attributes. It's necessary to filter the features as the neighbors could change depending on the chosen attributes.
+
+## Decision Boundaries
+
+These are the borders between the instances of the same class. It could be simple lines, but also complex contours.
+
+Highly dependent on the k and other model parameters:
+- If you increase k, you will have more complex decision boundaries and just by moving the instance a little, it could be classified differently.
+
+## Bias and Variance Tradeoff
+
+Two important concepts that describe the prediction of a classification model.
+
+> Bias is inversely proportional to the difference between the average prediction and the predicted values. If the set is very uniform and homogeneous, than a bias was probably introduced in the training stage. **High bias means underfitting of the data**.
+>  Variance is the opposite of bias. It's the variability of the dataset. **High variance means overfitting of the data**.
+
+## Ensemble Methods
+
+This is a group of different approaches that aim at building a better predictor. The principle is the same, combining models (**weak learners**) to get better results with more accurate and/or robust models.
+
+### Bagging
+
+Bagging is a specific type of ensemble method where you divide the original datasets into random samples and train weak learners for each of them.
+
+The result is then the average/vote of the result of weak learners. It's a parallel process. The weak learners are somewhat homogeneous. Get an ensemble method with less variance, usually.
+
+- If the weak learners are decision trees, then the bagging process is called "Random Forest".
+
+### Boosting
+
+A different type of ensemble method. The steps follow:
+
+1. A set of weak learners with the same weight.
+2. False classified data receive more weight and correct classified ones, less.
+3. The data is then passed to a different model. The performance of the model also grants it a proportional weight.
+4. In the end, the strongest learner predicts the dataset.
+
+It's a sequential process. The weak learners are somewhat homogeneous as well. Get an ensemble method with less bias, usually.
+
+### Stacking 
+
+Learn from several different weak learners (**base-learners**) combined to train a **meta-model** to output a prediction based on the multiple predictions from the weak learners.
+
+
+It's a parallel process. The weak learners are somewhat heterogeneous. Get an ensemble method with less bias, usually.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
