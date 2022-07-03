@@ -186,7 +186,7 @@ Entropy
  
  $$ H = E(I) = ∑pi*Ii = -∑pi*log2(pi) $$
  
- **It's the sum of the information content of each event multiplied by its probability of occurence.
+ **It's the sum of the information content of each event multiplied by its probability of occurence.**
  
 The formula then just represents the information content decrease from the node parent Y to the node child X.
 
