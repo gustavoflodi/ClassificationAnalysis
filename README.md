@@ -130,4 +130,121 @@ Two solutions:
 - **Binning**: original continuous values become interval or ordinal labels.
 - **Probabilistic distribution**: one density or probabilitic distribution of the attribute value (a.k.a. histogram of continuous values) to each class. Described by mean and standard deviation.
 
+## Decision Trees
+
+- Decision Trees are a category of methods to classify classes, i.e., it represents not only a single method of this form of Data Science.
+- When the tree is built, it's by itself the model. It follows a "divide and conquer" strategy, until all of the divided partitions have only one class among them.
+
+### Important terms
+
+- Nodes: the test, the question of a particular attribute.
+- Arrows or sides: the result from the test.
+- Root node: the initial attribute to divide the dataset.
+- Leafs: classes that result from the partitioning.
+
+### Important considerations
+
+- Specific order from root node to leafs actually matters!
+    - **Then from where to start? Which would be the ideal root node?**
+    - **And after the root node, from which order of attributes does one follow to build the tree?**
+    
+### ID3 Algorithm
+
+Let's try to answer these last two questions with a specific algorithm of decision trees.
+
+- It utilizes "information gain" as criteria to select the best attribute to partition.
+    - It's a greedy algorithm. Takes the highest gains first and the result may not be optimal.
+    - It can overfit the data and it's difficult to use on continuous data as attributes because it creates a lot of branches.
+    
+It works by trying to answer the question: **Which attribute better partition the dataset to "pure" sets, in other words, to sets with a more uniformity class.
+
+> The information gain actually comes from Information Theory and the idea behind is that mixed or not pure sets needs more information to be represented or coded. So one would prefer going to less hustle (haha) and select the attribute with which the information gain decreases the most. In CS terms, one would need more bits to code a more heterogeneous partition.
+
+#### Formula
+
+Sure, we got it! But how to calculate it?
+
+$$ IG(Y, X) = H(Y) - H(Y|X) $$
+
+Let's explain this formula now.
+
+#### Just to illustrate information content:
+
+- If an event is certain to happen: the information content = 0.
+- The information content of a polar bear to appear in Australia is huge!
+- In a sequence of events, such as to decipher a string, the information of the characters just sum up.
+
+> If information content is measured in bits, and bits are binary. Then to measure information, we just need to count the yes/no questions to define the event.
+
+$$ N = 2^I -> I = log2(N) = log2(1/pi) = -log2(pi) $$ with I = Information and N = 1/pi with N being the number of outcomes and pi being the probability
+
+    - The probability of each outcome in a coin toss is 0.5 because we have two possible outcomes N=2.
+    - The information to code a coin toss is I = 1 bit.
+
+Entropy
+ : It is the H in the formula and represents the average information content of an event or sequence of events, measuring the effort required to form a message or to represent a message (in this case, the partition)
+ 
+ $$ H = E(I) = ∑pi*Ii = -∑pi*log2(pi) $$
+ 
+ **It's the sum of the information content of each event multiplied by its probability of occurence.
+ 
+The formula then just represents the information content decrease from the node parent Y to the node child X.
+
+You can also Entropy for conditional events with $$ I(y|x) = -log2p(y|x) $$
+And $$ H(Y|X) = -∑∑ p(x)*p(y|x)*log2p(y|x) $$ 
+
+### Pruning
+
+> Pruning is a method to reduce the overfitting of the decision tree model. It's the "trimming" of the decision tree, cutting off branches and sub-trees to make it less accurate to the training data and, maybe, more accurate to unseen data. It leads to less complex trees.
+
+#### Considerations of Pruning
+
+1. Pre-pruning sometimes necessary.
+2. The construction of the tree is stopped at certain point.
+3. Nodes are set to leafs even though they may not be yet pure.
+4. Post-prunning or reversing splits sometimes necessary, when, for example:
+    a. The partitions are sufficient small at a prior split.
+    b. The instances of a subset were pure enough at a prior split result.
+    c. The instances of subsets have identical attribute values
+
+*Parameters for specific pruning*
+
+- Size of the leaf or size to split: if the leafs already have this many instances, stop.
+- Depth of the tree: if you already split the tree this many times, stop.
+- Information gain: if these partitions already have information content down to this amount, stop.
+
+*Problem*
+
+- Choose your parameter(s) carefully not to have oversized decision tree with small threshold or to omit useful splits with large threshold. 
+
+#### Gain Ratio and Split points
+
+Splitting the tree a lot of times will most definitely lead to homogenous partitions that may have only a few instances. Thus, not representing the rule or the seen pattern in the real world. Useful for countinuous data as attributes values, for example, splitting point where "Temperature > 82".
+
+**The solution may be to end the tree in a split with the highest information decrease.**
+
+Use of the Gain Ratio for that objective (IG / Number of created branches):
+
+$$ GR(Y, X) = I(Y, X)/ SI(Y, X) $$
+
+### Missing Values
+
+Sometimes the attributes' values are not known for some instances due to time consuming efforts or just not recorded.
+
+#### Possible solutions
+
+1. Assign the most common value of the attribute to the instance's attribute.
+2. Assign the most common value of the attribute from the instances with the same class.
+
+### More algorithms
+
+- **ID3**: suitable for discrete values as attributes only and has no pruning.
+
+- **C4.5**: discrete and continuous values as attributes, pruning and missing values from attributes also possible.
+
+
+
+
+
+
 
